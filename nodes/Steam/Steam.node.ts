@@ -1,7 +1,7 @@
 import { INodeProperties, INodeType, INodeTypeDescription } from 'n8n-workflow';
 
 import { gameResource, gameOperations, gameFields } from './game';
-import { appIdField } from './shared';
+import { appIdField, simplifyField } from './shared';
 import { userOperations, userResource } from './user';
 
 // eslint-disable-next-line n8n-nodes-base/node-param-default-missing
@@ -37,6 +37,13 @@ export class Steam implements INodeType {
 		requestDefaults: {
 			baseURL: 'http://api.steampowered.com',
 		},
-		properties: [resources, gameOperations, userOperations, appIdField, ...gameFields],
+		properties: [
+			resources,
+			gameOperations,
+			userOperations,
+			appIdField,
+			...gameFields,
+			simplifyField,
+		],
 	};
 }

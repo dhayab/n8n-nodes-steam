@@ -1,7 +1,7 @@
 import { INodeProperties, INodePropertyOptions } from 'n8n-workflow';
 
 import * as getFriendList from './getFriendList';
-import * as getUserProfile from './getUserProfile';
+import * as getPlayerSummaries from './getPlayerSummaries';
 
 export const userResource: INodePropertyOptions = {
 	name: 'User',
@@ -20,5 +20,5 @@ export const userOperations: INodeProperties = {
 		},
 	},
 	default: getFriendList.operation.name,
-	options: [getFriendList.operation, getUserProfile.operation],
+	options: [getFriendList.operation, getPlayerSummaries.operation],
 };

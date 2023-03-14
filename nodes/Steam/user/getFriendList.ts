@@ -1,4 +1,15 @@
 import { INodePropertyOptions } from 'n8n-workflow';
+import { simplify } from '../shared';
+
+type GetFriendListApi = {
+	friendslist: {
+		friends: {
+			steamid: string;
+			relationship: string;
+			friend_since: number;
+		}[];
+	};
+};
 
 export const operation: INodePropertyOptions = {
 	name: 'Get Friend List',
@@ -12,6 +23,9 @@ export const operation: INodePropertyOptions = {
 			qs: {
 				relationship: 'friend',
 			},
+		},
+		output: {
+			postReceive: simplify<GetFriendListApi>((json) => json.friendslist),
 		},
 	},
 };

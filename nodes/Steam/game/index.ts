@@ -1,6 +1,6 @@
 import { INodeProperties, INodePropertyOptions } from 'n8n-workflow';
 
-import * as getGameAchievements from './getGameAchievements';
+import * as getPlayerAchievements from './getPlayerAchievements';
 import * as getOwnedGames from './getOwnedGames';
 import * as getRecentlyPlayedGames from './getRecentlyPlayedGames';
 
@@ -20,12 +20,12 @@ export const gameOperations: INodeProperties = {
 			resource: ['game'],
 		},
 	},
-	default: getGameAchievements.operation.name,
+	default: getPlayerAchievements.operation.name,
 	options: [
-		getGameAchievements.operation,
+		getPlayerAchievements.operation,
 		getOwnedGames.operation,
 		getRecentlyPlayedGames.operation,
 	],
 };
 
-export const gameFields: INodeProperties[] = [...getGameAchievements.fields];
+export const gameFields: INodeProperties[] = [...getPlayerAchievements.fields];

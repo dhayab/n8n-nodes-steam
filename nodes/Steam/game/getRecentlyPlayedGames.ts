@@ -1,4 +1,21 @@
 import { INodePropertyOptions } from 'n8n-workflow';
+import { simplify } from '../shared';
+
+type GetRecentlyPlayedGamesApi = {
+	response: {
+		total_count: number;
+		games: {
+			appid: number;
+			name: string;
+			playtime_2weeks: number;
+			playtime_forever: number;
+			img_icon_url: string;
+			playtime_windows_forever: number;
+			playtime_mac_forever: number;
+			playtime_linux_forever: number;
+		}[];
+	};
+};
 
 export const operation: INodePropertyOptions = {
 	name: 'Get Recently Played Games',
@@ -9,6 +26,9 @@ export const operation: INodePropertyOptions = {
 		request: {
 			method: 'GET',
 			url: '/IPlayerService/GetRecentlyPlayedGames/v0001',
+		},
+		output: {
+			postReceive: simplify<GetRecentlyPlayedGamesApi>((json) => json.response),
 		},
 	},
 };

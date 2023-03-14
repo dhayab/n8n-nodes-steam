@@ -1,4 +1,25 @@
 import { INodePropertyOptions } from 'n8n-workflow';
+import { simplify } from '../shared';
+
+type GetOwnedGamesApi = {
+	response: {
+		game_count: number;
+		games: {
+			appid: number;
+			name: string;
+			playtime_2weeks?: number;
+			playtime_forever: number;
+			img_icon_url: string;
+			has_community_visible_stats?: boolean;
+			has_leaderboards?: boolean;
+			playtime_windows_forever: number;
+			playtime_mac_forever: number;
+			playtime_linux_forever: number;
+			rtime_last_played: number;
+			content_descriptorids?: number[];
+		}[];
+	};
+};
 
 export const operation: INodePropertyOptions = {
 	name: 'Get Owned Games',
@@ -12,6 +33,9 @@ export const operation: INodePropertyOptions = {
 			qs: {
 				include_appinfo: true,
 			},
+		},
+		output: {
+			postReceive: simplify<GetOwnedGamesApi>((json) => json.response),
 		},
 	},
 };

@@ -1,8 +1,24 @@
 import { INodeProperties, INodePropertyOptions } from 'n8n-workflow';
+import { simplify } from '../shared';
+
+type GetPlayerAchievementsApi = {
+	playerstats: {
+		steamID: string;
+		gameName: string;
+		achievements: {
+			apiname: string;
+			achieved: number;
+			unlocktime: number;
+			name?: string;
+			description?: string;
+		}[];
+		success: boolean;
+	};
+};
 
 export const operation: INodePropertyOptions = {
 	name: 'Get Game Achievements',
-	value: 'getGameAchievements',
+	value: 'getPlayerAchievements',
 	action: 'Get game achievements',
 	description: 'Returns a list of achievements for a player',
 	routing: {
@@ -12,6 +28,9 @@ export const operation: INodePropertyOptions = {
 			qs: {
 				l: 'english',
 			},
+		},
+		output: {
+			postReceive: simplify<GetPlayerAchievementsApi>((json) => json.playerstats),
 		},
 	},
 };
@@ -24,7 +43,7 @@ export const fields: INodeProperties[] = [
 		required: true,
 		displayOptions: {
 			show: {
-				operation: ['getGameAchievements'],
+				operation: ['getPlayerAchievements'],
 			},
 		},
 		default: '',

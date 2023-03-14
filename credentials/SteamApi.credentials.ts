@@ -5,7 +5,7 @@ import {
 	INodeProperties,
 } from 'n8n-workflow';
 
-import { operation as getUserProfile } from '../nodes/Steam/user/getUserProfile';
+import { operation as getPlayerSummaries } from '../nodes/Steam/user/getPlayerSummaries';
 
 export class SteamApi implements ICredentialType {
 	name = 'steamApi';
@@ -30,7 +30,7 @@ export class SteamApi implements ICredentialType {
 	};
 	test: ICredentialTestRequest = {
 		request: {
-			url: `http://api.steampowered.com${getUserProfile.routing?.request?.url}`,
+			url: `http://api.steampowered.com${getPlayerSummaries.routing?.request?.url}`,
 			qs: {
 				steamids: '0',
 			},
