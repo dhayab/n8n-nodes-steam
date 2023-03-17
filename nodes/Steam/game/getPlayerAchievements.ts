@@ -25,9 +25,6 @@ export const getPlayerAchievements = new Operation({
 		request: {
 			method: 'GET',
 			url: '/ISteamUserStats/GetPlayerAchievements/v0001',
-			qs: {
-				l: 'english',
-			},
 		},
 	},
 })
@@ -43,6 +40,22 @@ export const getPlayerAchievements = new Operation({
 			request: {
 				qs: {
 					appid: '={{ $value }}',
+				},
+			},
+		},
+	})
+	.addField({
+		displayName: 'Language',
+		name: 'language',
+		type: 'string',
+		default: 'English',
+		description:
+			'Language to use for localizing the achievements (defaults to English if the desired locale is not available)',
+		placeholder: 'English, French, Japanese ...',
+		routing: {
+			request: {
+				qs: {
+					l: '={{ $value.toLowerCase() }}',
 				},
 			},
 		},
