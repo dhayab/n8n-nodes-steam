@@ -1,5 +1,5 @@
-import { INodeProperties, INodePropertyOptions } from 'n8n-workflow';
-import { simplify } from '../shared';
+import { Operation } from '../../../helpers';
+import { steamId } from '../steamId.field';
 
 type GetPlayerAchievementsApi = {
 	playerstats: {
@@ -16,7 +16,7 @@ type GetPlayerAchievementsApi = {
 	};
 };
 
-export const operation: INodePropertyOptions = {
+export const getPlayerAchievements = new Operation({
 	name: 'Get Game Achievements',
 	value: 'getPlayerAchievements',
 	action: 'Get game achievements',
@@ -29,23 +29,15 @@ export const operation: INodePropertyOptions = {
 				l: 'english',
 			},
 		},
-		output: {
-			postReceive: simplify<GetPlayerAchievementsApi>((json) => json.playerstats),
-		},
 	},
-};
-
-export const fields: INodeProperties[] = [
-	{
+})
+	.transformOutput<GetPlayerAchievementsApi>((json) => json.playerstats)
+	.addField(steamId)
+	.addField({
 		displayName: 'App ID',
-		name: 'appid',
+		name: 'appId',
 		type: 'string',
 		required: true,
-		displayOptions: {
-			show: {
-				operation: ['getPlayerAchievements'],
-			},
-		},
 		default: '',
 		routing: {
 			request: {
@@ -54,5 +46,4 @@ export const fields: INodeProperties[] = [
 				},
 			},
 		},
-	},
-];
+	});

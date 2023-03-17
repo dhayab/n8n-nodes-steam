@@ -1,5 +1,5 @@
-import { INodePropertyOptions } from 'n8n-workflow';
-import { simplify } from '../shared';
+import { Operation } from '../../../helpers';
+import { steamId } from '../steamId.field';
 
 type GetOwnedGamesApi = {
 	response: {
@@ -21,7 +21,7 @@ type GetOwnedGamesApi = {
 	};
 };
 
-export const operation: INodePropertyOptions = {
+export const getOwnedGames = new Operation({
 	name: 'Get Owned Games',
 	value: 'getOwnedGames',
 	action: 'Get owned games',
@@ -34,8 +34,7 @@ export const operation: INodePropertyOptions = {
 				include_appinfo: true,
 			},
 		},
-		output: {
-			postReceive: simplify<GetOwnedGamesApi>((json) => json.response),
-		},
 	},
-};
+})
+	.transformOutput<GetOwnedGamesApi>((json) => json.response)
+	.addField(steamId);

@@ -1,5 +1,7 @@
-import { INodePropertyOptions } from 'n8n-workflow';
-import { simplify } from '../shared';
+import { Operation } from '../../../helpers';
+import { steamId } from '../steamId.field';
+
+export const API_ENDPOINT = '/ISteamUser/GetPlayerSummaries/v0002';
 
 type GetPlayerSummariesApi = {
 	response: {
@@ -30,7 +32,7 @@ type GetPlayerSummariesApi = {
 	};
 };
 
-export const operation: INodePropertyOptions = {
+export const getPlayerSummaries = new Operation({
 	name: 'Get User Profile',
 	value: 'getPlayerSummaries',
 	action: 'Get user profile',
@@ -38,10 +40,9 @@ export const operation: INodePropertyOptions = {
 	routing: {
 		request: {
 			method: 'GET',
-			url: '/ISteamUser/GetPlayerSummaries/v0002',
-		},
-		output: {
-			postReceive: simplify<GetPlayerSummariesApi>((json) => json.response.players[0]),
+			url: API_ENDPOINT,
 		},
 	},
-};
+})
+	.transformOutput<GetPlayerSummariesApi>((json) => json.response.players[0])
+	.addField(steamId);

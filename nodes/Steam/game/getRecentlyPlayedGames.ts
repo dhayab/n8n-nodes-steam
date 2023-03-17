@@ -1,5 +1,5 @@
-import { INodePropertyOptions } from 'n8n-workflow';
-import { simplify } from '../shared';
+import { Operation } from '../../../helpers';
+import { steamId } from '../steamId.field';
 
 type GetRecentlyPlayedGamesApi = {
 	response: {
@@ -17,7 +17,7 @@ type GetRecentlyPlayedGamesApi = {
 	};
 };
 
-export const operation: INodePropertyOptions = {
+export const getRecentlyPlayedGames = new Operation({
 	name: 'Get Recently Played Games',
 	value: 'getRecentlyPlayedGames',
 	action: 'Get recently played games',
@@ -27,8 +27,7 @@ export const operation: INodePropertyOptions = {
 			method: 'GET',
 			url: '/IPlayerService/GetRecentlyPlayedGames/v0001',
 		},
-		output: {
-			postReceive: simplify<GetRecentlyPlayedGamesApi>((json) => json.response),
-		},
 	},
-};
+})
+	.transformOutput<GetRecentlyPlayedGamesApi>((json) => json.response)
+	.addField(steamId);

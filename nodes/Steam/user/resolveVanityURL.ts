@@ -1,5 +1,4 @@
-import { INodeProperties, INodePropertyOptions } from 'n8n-workflow';
-import { simplify } from '../shared';
+import { Operation } from '../../../helpers';
 
 type ResolveVanityURLApi = {
 	response: {
@@ -9,7 +8,7 @@ type ResolveVanityURLApi = {
 	};
 };
 
-export const operation: INodePropertyOptions = {
+export const resolveVanityURL = new Operation({
 	name: 'Resolve Vanity URL',
 	value: 'resolveVanityURL',
 	action: 'Resolve vanity URL',
@@ -19,26 +18,16 @@ export const operation: INodePropertyOptions = {
 			method: 'GET',
 			url: '/ISteamUser/ResolveVanityURL/v0001',
 		},
-		output: {
-			postReceive: simplify<ResolveVanityURLApi>((json) => json.response),
-		},
 	},
-};
-
-export const fields: INodeProperties[] = [
-	{
+})
+	.transformOutput<ResolveVanityURLApi>((json) => json.response)
+	.addField({
 		displayName: 'Vanity URL',
 		name: 'vanityURL',
 		type: 'string',
 		required: true,
 		default: '',
 		placeholder: 'gabelogannewell',
-		displayOptions: {
-			show: {
-				resource: ['user'],
-				operation: ['resolveVanityURL'],
-			},
-		},
 		routing: {
 			request: {
 				qs: {
@@ -46,5 +35,4 @@ export const fields: INodeProperties[] = [
 				},
 			},
 		},
-	},
-];
+	});

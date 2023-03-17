@@ -1,27 +1,12 @@
-import { INodeProperties, INodePropertyOptions } from 'n8n-workflow';
+import { Resource } from '../../../helpers';
+import { getFriendList } from './getFriendList';
+import { getPlayerSummaries } from './getPlayerSummaries';
+import { resolveVanityURL } from './resolveVanityURL';
 
-import * as getFriendList from './getFriendList';
-import * as getPlayerSummaries from './getPlayerSummaries';
-import * as resolveVanityURL from './resolveVanityURL';
-
-export const userResource: INodePropertyOptions = {
+export const user = new Resource({
 	name: 'User',
 	value: 'user',
-};
-
-// eslint-disable-next-line n8n-nodes-base/node-param-default-missing
-export const userOperations: INodeProperties = {
-	displayName: 'Operation',
-	name: 'operation',
-	type: 'options',
-	noDataExpression: true,
-	displayOptions: {
-		show: {
-			resource: ['user'],
-		},
-	},
-	default: getFriendList.operation.name,
-	options: [getFriendList.operation, getPlayerSummaries.operation, resolveVanityURL.operation],
-};
-
-export const userFields: INodeProperties[] = [...resolveVanityURL.fields];
+})
+	.addOperation(getFriendList)
+	.addOperation(getPlayerSummaries)
+	.addOperation(resolveVanityURL);
