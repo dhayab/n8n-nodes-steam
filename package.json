@@ -19,8 +19,8 @@
   },
   "main": "index.js",
   "scripts": {
-    "build": "tsc && gulp build:icons",
-    "dev": "tsc --watch",
+    "build": "ttsc && gulp build:icons",
+    "dev": "ttsc --watch",
     "format": "prettier nodes credentials --write",
     "lint": "eslint nodes credentials package.json",
     "lintfix": "eslint nodes credentials package.json --fix",
@@ -49,6 +49,8 @@
     "n8n-workflow": "*",
     "prettier": "^2.7.1",
     "shipjs": "0.25.1",
-    "typescript": "~4.8.4"
+    "ttypescript": "^1.5.15",
+    "typescript": "~4.8.4",
+    "typescript-transform-paths": "^3.4.6"
   }
 }

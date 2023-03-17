@@ -1,4 +1,5 @@
-import { Resource } from '../../../helpers';
+import { Resource } from '@helpers';
+
 import { getOwnedGames } from './getOwnedGames';
 import { getPlayerAchievements } from './getPlayerAchievements';
 import { getRecentlyPlayedGames } from './getRecentlyPlayedGames';

@@ -1,4 +1,5 @@
-import { Operation } from '../../../helpers';
+import { Operation } from '@helpers';
+
 import { steamId } from '../steamId.field';
 
 export const API_ENDPOINT = '/ISteamUser/GetPlayerSummaries/v0002';

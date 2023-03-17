@@ -1,4 +1,5 @@
-import { Resource } from '../../../helpers';
+import { Resource } from '@helpers';
+
 import { getFriendList } from './getFriendList';
 import { getPlayerSummaries } from './getPlayerSummaries';
 import { resolveVanityURL } from './resolveVanityURL';

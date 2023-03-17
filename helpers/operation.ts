@@ -1,4 +1,4 @@
-import { IDataObject, INodeProperties, INodePropertyOptions } from 'n8n-workflow';
+import type { IDataObject, INodeProperties, INodePropertyOptions } from 'n8n-workflow';
 
 type OperationOutput = {
 	definition: INodePropertyOptions;

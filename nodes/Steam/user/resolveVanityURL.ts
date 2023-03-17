@@ -1,4 +1,4 @@
-import { Operation } from '../../../helpers';
+import { Operation } from '@helpers';
 
 type ResolveVanityURLApi = {
 	response: {

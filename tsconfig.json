@@ -20,6 +20,18 @@
 		"sourceMap": true,
 		"skipLibCheck": true,
 		"outDir": "./dist/",
+		"paths": {
+			"@helpers": ["./helpers"]
+		},
+		"plugins": [
+			{
+				"transform": "typescript-transform-paths",
+			},
+			{
+				"transform": "typescript-transform-paths",
+				"afterDeclarations": true
+			}
+		],
 	},
 	"include": [
 		"credentials/**/*",

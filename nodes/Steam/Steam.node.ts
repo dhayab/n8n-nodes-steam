@@ -1,6 +1,7 @@
 import type { INodeType } from 'n8n-workflow';
 
-import { Description } from '../../helpers';
+import { Description } from '@helpers';
+
 import { game } from './game';
 import { user } from './user';
 
