@@ -2,7 +2,7 @@ import { INodeProperties, INodeType, INodeTypeDescription } from 'n8n-workflow';
 
 import { gameResource, gameOperations, gameFields } from './game';
 import { appIdField, simplifyField } from './shared';
-import { userOperations, userResource } from './user';
+import { userFields, userOperations, userResource } from './user';
 
 // eslint-disable-next-line n8n-nodes-base/node-param-default-missing
 const resources: INodeProperties = {
@@ -22,7 +22,7 @@ export class Steam implements INodeType {
 		group: [],
 		version: 1,
 		description: 'Get data from the Steam Web API',
-		subtitle: '={{ $parameter.operation }}',
+		subtitle: '={{ $parameter.operation.replace(/([a-z])([A-Z])/g, "$1 $2").toTitleCase() }}',
 		defaults: {
 			name: 'Steam',
 		},
@@ -43,6 +43,7 @@ export class Steam implements INodeType {
 			userOperations,
 			appIdField,
 			...gameFields,
+			...userFields,
 			simplifyField,
 		],
 	};

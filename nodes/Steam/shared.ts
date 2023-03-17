@@ -10,6 +10,9 @@ export const appIdField: INodeProperties = {
 		show: {
 			resource: ['game', 'user'],
 		},
+		hide: {
+			operation: ['resolveVanityURL'],
+		},
 	},
 	default: '',
 	routing: {

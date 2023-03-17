@@ -2,6 +2,7 @@ import { INodeProperties, INodePropertyOptions } from 'n8n-workflow';
 
 import * as getFriendList from './getFriendList';
 import * as getPlayerSummaries from './getPlayerSummaries';
+import * as resolveVanityURL from './resolveVanityURL';
 
 export const userResource: INodePropertyOptions = {
 	name: 'User',
@@ -20,5 +21,7 @@ export const userOperations: INodeProperties = {
 		},
 	},
 	default: getFriendList.operation.name,
-	options: [getFriendList.operation, getPlayerSummaries.operation],
+	options: [getFriendList.operation, getPlayerSummaries.operation, resolveVanityURL.operation],
 };
+
+export const userFields: INodeProperties[] = [...resolveVanityURL.fields];
