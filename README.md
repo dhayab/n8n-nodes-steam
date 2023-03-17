@@ -1,4 +1,4 @@
-# n8n-nodes-steam
+# n8n-nodes-steam · [![Get the latest version on npm](https://img.shields.io/npm/v/n8n-nodes-steam?style=flat-square)](https://npmjs.com/package/n8n-nodes-steam)
 
 This is an n8n community node. It lets you use the Steam Web API in your n8n workflows.
 
