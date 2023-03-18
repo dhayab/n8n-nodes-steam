@@ -1,6 +1,6 @@
 import { Operation } from '@helpers';
 
-import { steamId } from '../steamId.field';
+import { steamId } from '../shared/steamId.field';
 
 type GetOwnedGamesApi = {
 	response: {
@@ -37,5 +37,5 @@ export const getOwnedGames = new Operation({
 		},
 	},
 })
-	.transformOutput<GetOwnedGamesApi>((json) => json.response)
+	.addSimplifiedOutput<GetOwnedGamesApi>((json) => json.response)
 	.addField(steamId);

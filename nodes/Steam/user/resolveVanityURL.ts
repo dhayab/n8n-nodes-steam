@@ -20,7 +20,7 @@ export const resolveVanityURL = new Operation({
 		},
 	},
 })
-	.transformOutput<ResolveVanityURLApi>((json) => json.response)
+	.addSimplifiedOutput<ResolveVanityURLApi>((json) => json.response)
 	.addField({
 		displayName: 'Vanity URL',
 		name: 'vanityURL',

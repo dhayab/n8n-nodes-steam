@@ -1,6 +1,6 @@
 import { Operation } from '@helpers';
 
-import { steamId } from '../steamId.field';
+import { steamId } from '../shared/steamId.field';
 
 export const API_ENDPOINT = '/ISteamUser/GetPlayerSummaries/v0002';
 
@@ -45,5 +45,5 @@ export const getPlayerSummaries = new Operation({
 		},
 	},
 })
-	.transformOutput<GetPlayerSummariesApi>((json) => json.response.players[0])
+	.addSimplifiedOutput<GetPlayerSummariesApi>((json) => json.response.players[0])
 	.addField(steamId);

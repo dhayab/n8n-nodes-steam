@@ -3,13 +3,29 @@ import type { INodeProperties, INodePropertyOptions } from 'n8n-workflow';
 import { Operation } from './operation';
 
 type AdditionalParameters = {
+	/**
+	 * The label used for the operations UI element
+	 * @default "Operation"
+	 */
 	operationDisplayName: string;
+};
+
+type ResourceOutput = {
+	definition: INodePropertyOptions;
+	operations: INodeProperties;
+	fields: INodeProperties[];
 };
 
 export class Resource {
 	private operationDescription: INodeProperties;
 	private operations: Operation[] = [];
 
+	/**
+	 * This helper creates a resource that can be added to a {@link Description}.
+	 * @param resource A resource's option object as specified by the n8n reference
+	 * @param additionalParameters
+	 * @see https://docs.n8n.io/integrations/creating-nodes/build/reference/node-base-files/#resource-objects
+	 */
 	constructor(
 		private resource: INodePropertyOptions,
 		additionalParameters: AdditionalParameters = { operationDisplayName: 'Operation' },
@@ -28,6 +44,14 @@ export class Resource {
 		};
 	}
 
+	/**
+	 * Adds an Operation to this Resource.
+	 * `displayOptions` is automatically applied by the Resource.
+	 * @param operation The operation's option object as specified by the n8n reference
+	 * @param setDefault Whether to make this Operation selected by default
+	 * @chainable
+	 * @see https://docs.n8n.io/integrations/creating-nodes/build/reference/node-base-files/#operations-objects
+	 */
 	addOperation(operation: Operation, setDefault = false) {
 		this.operations.push(operation);
 		if (setDefault) {
@@ -36,7 +60,11 @@ export class Resource {
 		return this;
 	}
 
-	apply() {
+	/**
+	 * Returns a description of the Resource, to be used by the Description helper in order to create a compatible n8n Node description.
+	 * @internal
+	 */
+	apply(): ResourceOutput {
 		const operationsData = this.operations.reduce(
 			({ operations, fields }, operation) => {
 				const { definition, fields: operationFields } = operation.apply();
@@ -75,6 +103,9 @@ export class Resource {
 		};
 	}
 
+	/**
+	 * The resource's identifier
+	 */
 	get value() {
 		return this.resource.value;
 	}

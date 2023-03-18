@@ -1,6 +1,6 @@
 import { Operation } from '@helpers';
 
-import { steamId } from '../steamId.field';
+import { steamId } from '../shared/steamId.field';
 
 type GetRecentlyPlayedGamesApi = {
 	response: {
@@ -30,5 +30,5 @@ export const getRecentlyPlayedGames = new Operation({
 		},
 	},
 })
-	.transformOutput<GetRecentlyPlayedGamesApi>((json) => json.response)
+	.addSimplifiedOutput<GetRecentlyPlayedGamesApi>((json) => json.response)
 	.addField(steamId);

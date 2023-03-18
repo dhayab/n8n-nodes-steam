@@ -1,6 +1,6 @@
 import { Operation } from '@helpers';
 
-import { steamId } from '../steamId.field';
+import { steamId } from '../shared/steamId.field';
 
 type GetPlayerAchievementsApi = {
 	playerstats: {
@@ -29,7 +29,7 @@ export const getPlayerAchievements = new Operation({
 		},
 	},
 })
-	.transformOutput<GetPlayerAchievementsApi>((json) => json.playerstats)
+	.addSimplifiedOutput<GetPlayerAchievementsApi>((json) => json.playerstats)
 	.addField(steamId)
 	.addField({
 		displayName: 'App ID',

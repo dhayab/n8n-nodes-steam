@@ -4,6 +4,10 @@ import type { RequiredKeys } from './utils';
 import { Resource } from './resource';
 
 type AdditionalParameters = {
+	/**
+	 * The label used for the resources UI element
+	 * @default "Resource"
+	 */
 	resourceDisplayName: string;
 };
 
@@ -12,6 +16,12 @@ export class Description {
 	private resourcesDescription: INodeProperties;
 	private resources: Resource[] = [];
 
+	/**
+	 * This helper creates a node description that can be added to an n8n node class. All its methods (except `apply()`) can be chained.
+	 * @param description A node description as specified by the n8n reference
+	 * @param additionalParameters
+	 * @see https://docs.n8n.io/integrations/creating-nodes/build/reference/node-base-files/#outline-structure-for-a-declarative-style-node
+	 */
 	constructor(
 		description: RequiredKeys<
 			INodeTypeDescription,
@@ -42,6 +52,13 @@ export class Description {
 		};
 	}
 
+	/**
+	 * Adds a Resource to this Description.
+	 * @param resource The resource's option object as specified by the n8n reference
+	 * @param setDefault Whether to make this Resource selected by default
+	 * @chainable
+	 * @see https://docs.n8n.io/integrations/creating-nodes/build/reference/node-base-files/#resource-objects
+	 */
 	addResource(resource: Resource, setDefault = false) {
 		this.resources.push(resource);
 		if (setDefault) {
@@ -50,6 +67,9 @@ export class Description {
 		return this;
 	}
 
+	/**
+	 * Returns a description that is compatible with n8n.
+	 */
 	apply(): INodeTypeDescription {
 		const resourcesData = this.resources.reduce(
 			({ resources, operations, fields }, resource) => {

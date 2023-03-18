@@ -1,8 +1,8 @@
 import { Operation } from '@helpers';
 
-import { steamId } from '../steamId.field';
+import { steamId } from '../shared/steamId.field';
 
-type GetBadges = {
+type GetBadgesApi = {
 	response: {
 		badges: {
 			badgeid: number;
@@ -33,5 +33,5 @@ export const getBadges = new Operation({
 		},
 	},
 })
-	.transformOutput<GetBadges>((json) => json.response)
+	.addSimplifiedOutput<GetBadgesApi>((json) => json.response)
 	.addField(steamId);

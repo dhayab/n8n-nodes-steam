@@ -1,6 +1,6 @@
 import { Operation } from '@helpers';
 
-import { steamId } from '../steamId.field';
+import { steamId } from '../shared/steamId.field';
 
 type GetFriendListApi = {
 	friendslist: {
@@ -27,5 +27,5 @@ export const getFriendList = new Operation({
 		},
 	},
 })
-	.transformOutput<GetFriendListApi>((json) => json.friendslist)
+	.addSimplifiedOutput<GetFriendListApi>((json) => json.friendslist)
 	.addField(steamId);
