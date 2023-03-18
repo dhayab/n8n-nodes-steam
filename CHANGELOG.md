@@ -1,3 +1,12 @@
+# [0.4.0](https://github.com/dhayab/n8n-nodes-steam/compare/v0.3.0...v0.4.0) (2023-03-18)
+
+
+### Features
+
+* **operation:** implement get user badges ([f286aed](https://github.com/dhayab/n8n-nodes-steam/commit/f286aed7b4cfb98865d1336f5e7244ede4091716))
+
+
+
 # [0.3.0](https://github.com/dhayab/n8n-nodes-steam/compare/v0.2.0...v0.3.0) (2023-03-17)
 
 

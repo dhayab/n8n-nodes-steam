@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-steam",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Use the Steam Web API in your n8n workflows",
   "keywords": [
     "n8n-community-node-package",
